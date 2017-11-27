@@ -1,0 +1,1 @@
+id1, descriere1, culoare1, mărime1, id2, descriere2, culoare2, mărime2, id3, descriere3, culoare3, marime3
