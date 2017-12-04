@@ -49,17 +49,33 @@ public class Employee {
     public Employee(){}
 
 
-    public boolean equals(Employee e){
-        if(e.id == this.id && e.firstName == this.firstName && e.lastName == this.lastName && e.cnp == this.cnp){
-            return true;
-        }
-        return false;
-    }
 
     public void replaceWith(Employee e){
         this.id = e.id;
         this.firstName = e.firstName;
         this.lastName = e.lastName;
         this.cnp = e.cnp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (id != employee.id) return false;
+        if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
+        return cnp != null ? cnp.equals(employee.cnp) : employee.cnp == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (cnp != null ? cnp.hashCode() : 0);
+        return result;
     }
 }

@@ -1,51 +1,54 @@
 package com.codegile.univ.mihai.week1.day2;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class EmployeeCrud {
-    public static ArrayList<Employee> data = null;
+    public static Set<Employee> data = null; //use set
 
-    public EmployeeCrud(){
-        data = new ArrayList<Employee>();
+    public EmployeeCrud() {
+        data = new HashSet<>();
     }
 
-    public boolean CreateEmployee(Employee e){
-        for(int i = 0; i < data.size();i++){
-            System.out.println("next data size: " + data.size());
-            System.out.println(data.get(i));
-            if(data.get(i).equals(e)){
-                return false;
-            }
-        }
+    public boolean createEmployee(Employee e) {
+
         data.add(e);
+        System.out.println("Employee with name: " + "'" + e.getFirstName()+ "'" + " was created");
         return true;
     }
 
-    public ArrayList<Employee> ReadEmployee(String firstName, String lastName){
-        ArrayList<Employee> tmp = new ArrayList<>();
-        for(int i = 0; i< data.size(); i++){
-            if(data.get(i).getFirstName() == firstName && data.get(i).getLastName() == lastName){
-                tmp.add(data.get(i));
-            }
+    public Employee readEmployee(int id) {
+        for (Employee e : data) {
+            if(id == e.getId())
+                System.out.println(e.getId()+ " " + e.getFirstName() + " " + e.getLastName() + " " + e.getCnp());
+                return e;
         }
-        return tmp;
+        return null;
     }
 
-    public void UpdateEmployee(Employee e){
-        for(int i = 0; i < data.size();i++){
-            if(data.get(i).getId() == e.getId()){
-                data.get(i).replaceWith(e);
+    public void updateEmployee(Employee empl) {
+
+        for (Employee e: data) {
+            if(empl.getId() == e.getId()){
+                e.replaceWith(empl);
+            }
+        }
+    }
+
+    public boolean deleteEmployee(int id) {
+        Employee deleted = null;
+        for (Employee e: data) {
+            if(id == e.getId()){
+                deleted = e;
+                System.out.println("Employee deleted: " + e.getFirstName());
                 break;
             }
         }
-    }
-
-    public boolean DeleteEmployee(Employee e){
-        for(int i = 0; i < data.size();i++){
-            if(data.get(i).equals(e)){
-                data.remove(i);
-                return true;
-            }
+        if(deleted != null){
+            data.remove(deleted);
+            return true;
         }
         return false;
     }
